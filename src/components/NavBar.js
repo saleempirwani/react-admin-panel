@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   alpha,
   AppBar,
@@ -9,7 +10,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Cancel, Notifications, Search } from "@material-ui/icons";
-import React, { useState } from "react";
 
 export default function NavBar() {
   const [openSearch, setOpenSearch] = useState(false);
@@ -84,7 +84,6 @@ const useStyles = makeStyles((theme) => ({
       width: "60%",
     },
   },
-
   searchBtn: {
     marginRight: theme.spacing(2),
     display: "block",
@@ -92,16 +91,13 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-
   cancelBtn: {
     display: (props) => (props.openSearch ? "flex" : "none"),
   },
-
   input: {
     color: "white",
     marginLeft: theme.spacing(1),
   },
-
   icons: {
     alignItems: "center",
     display: (props) => (props.openSearch ? "none" : "flex"),

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   alpha,
   AppBar,
@@ -10,6 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Cancel, Notifications, Search } from "@material-ui/icons";
+import { useState } from "react";
+import { Colors } from "../assets/styles";
 
 export default function NavBar() {
   const [openSearch, setOpenSearch] = useState(false);
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     justifyContent: "space-between",
+    backgroundColor: Colors.green,
   },
   titleLg: {
     display: "none",

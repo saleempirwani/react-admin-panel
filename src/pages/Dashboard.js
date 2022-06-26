@@ -1,6 +1,12 @@
 import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
-import { LeftBar, NavBar } from "../components";
+import {
+  AddFloatingButton,
+  Feed,
+  LeftBar,
+  NavBar,
+  RightBar,
+} from "../components";
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -12,9 +18,14 @@ export default function Dashboard() {
         <Grid item sm={2} xs={2}>
           <LeftBar />
         </Grid>
-        <Grid item sm={7} xs={10}></Grid>
-        <Grid item sm={3} className={classes.right}></Grid>
+        <Grid item sm={7} xs={10}>
+          <Feed />
+        </Grid>
+        <Grid item sm={3} className={classes.right}>
+          <RightBar />
+        </Grid>
       </Grid>
+      <AddFloatingButton />
     </div>
   );
 }

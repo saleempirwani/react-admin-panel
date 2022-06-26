@@ -3,16 +3,17 @@ import {
   AppBar,
   Avatar,
   Badge,
+  Grid,
   InputBase,
   makeStyles,
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { Cancel, Notifications, Search } from "@material-ui/icons";
+import { Cancel, Notifications, Search, Menu } from "@material-ui/icons";
 import { useState } from "react";
 import { Colors } from "../assets/styles";
 
-export default function NavBar() {
+export default function NavBar({ setOpenMenu = () => {}, openMenu = false }) {
   const [openSearch, setOpenSearch] = useState(false);
 
   const classes = useStyles({ openSearch });
@@ -20,6 +21,7 @@ export default function NavBar() {
   return (
     <AppBar>
       <Toolbar className={classes.toolbar}>
+        <Menu onClick={() => setOpenMenu(!openMenu)} className={classes.menu} />
         <Typography variant="h6" className={classes.titleLg}>
           Admin Panel
         </Typography>
@@ -29,10 +31,12 @@ export default function NavBar() {
         <div className={classes.search}>
           <Search />
           <InputBase placeholder="Search..." className={classes.input} />
-          <Cancel
-            className={classes.cancelBtn}
-            onClick={() => setOpenSearch(false)}
-          />
+          <Grid container justifyContent="flex-end">
+            <Cancel
+              className={classes.cancelBtn}
+              onClick={() => setOpenSearch(false)}
+            />
+          </Grid>
         </div>
         <div className={classes.icons}>
           <Search
@@ -58,18 +62,23 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     backgroundColor: Colors.green,
   },
+  menu: (props) => ({
+    display: props.openSearch ? "none" : "flex",
+  }),
+
   titleLg: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
   },
-  titleSm: {
-    display: "block",
+
+  titleSm: (props) => ({
+    display: props.openSearch ? "none" : "flex",
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
-  },
+  }),
   search: {
     display: "flex",
     alignItems: "center",
@@ -83,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
       display: (props) => (props.openSearch ? "flex" : "none"),
-      width: "60%",
+      width: "100%",
     },
   },
   searchBtn: {

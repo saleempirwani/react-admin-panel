@@ -2,7 +2,6 @@ import {
   Button,
   Container,
   Fab,
-  FormControl,
   FormControlLabel,
   FormLabel,
   Grid,
@@ -15,12 +14,13 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import { Add, Close } from "@material-ui/icons";
-import React, { useState } from "react";
-import Post from "./Post";
+import { useState } from "react";
+import SnackBar from "./common/SnackBar";
 
 export default function AddFloatingButton() {
   // State
   const [openModal, setOpenModal] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const classes = useStyles();
 
@@ -94,7 +94,14 @@ export default function AddFloatingButton() {
             </div>
             <div className={classes.item}>
               <Grid container justifyContent="center">
-                <Button variant="outlined" color="primary">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => {
+                    setOpenSnackBar(true);
+                    setOpenModal(false);
+                  }}
+                >
                   Create
                 </Button>
               </Grid>
@@ -102,6 +109,11 @@ export default function AddFloatingButton() {
           </form>
         </Container>
       </Modal>
+      <SnackBar
+        open={openSnackBar}
+        setOpen={setOpenSnackBar}
+        message="Post has created"
+      />
     </>
   );
 }
